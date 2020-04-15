@@ -10,8 +10,7 @@ import {generateFilters} from "./components/mock/filter.js";
 
 
 const TASK_COUNT = 22;
-const SHOWING_TASKS_COUNT_ON_START = 8;
-const SHOWING_TASKS_COUNT_BY_BUTTON = 8;
+const SHOWING_TASKS_STEP = 8;
 
 const render = (container, template, place) => {
   container.insertAdjacentHTML(place, template);
@@ -35,7 +34,7 @@ const boardElement = siteMainElement.querySelector(`.board`);
 
 render(taskListElement, createTaskEditTemplate(tasks[0]), `beforeend`);
 
-let showingTasksCount = SHOWING_TASKS_COUNT_ON_START;
+let showingTasksCount = SHOWING_TASKS_STEP;
 
 tasks.slice(1, showingTasksCount).forEach((task) => render(taskListElement, createTaskTemplate(task), `beforeend`));
 
@@ -45,7 +44,7 @@ const loadMoreButton = boardElement.querySelector(`.load-more`);
 
 loadMoreButton.addEventListener(`click`, () => {
   const prevTasksCount = showingTasksCount;
-  showingTasksCount = showingTasksCount + SHOWING_TASKS_COUNT_BY_BUTTON;
+  showingTasksCount += SHOWING_TASKS_STEP;
 
 
   tasks.slice(prevTasksCount, showingTasksCount)
