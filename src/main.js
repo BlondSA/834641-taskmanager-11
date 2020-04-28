@@ -15,6 +15,8 @@ import {render, RenderPosition} from "./utils.js";
 const TASK_COUNT = 22;
 const SHOWING_TASKS_COUNT_ON_START = 8;
 const SHOWING_TASKS_COUNT_BY_BUTTON = 8;
+const ESCAPE_BUTTON = `Escape`;
+const ESC_BUTTON = `Esc`;
 
 const renderTask = (taskListElement, task) => {
   const replaceTaskToEdit = () => {
@@ -24,7 +26,7 @@ const renderTask = (taskListElement, task) => {
     taskListElement.replaceChild(taskComponent.getElement(), taskEditComponent.getElement());
   };
   const onEscKeyDown = (evt) => {
-    const isEscKey = evt.key === `Escape` || evt.key === `Esc`;
+    const isEscKey = evt.key === ESCAPE_BUTTON || evt.key === ESC_BUTTON;
     if (isEscKey) {
       replaceEditToTask();
       document.removeEventListener(`keydown`, onEscKeyDown);
