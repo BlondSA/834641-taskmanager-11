@@ -2,9 +2,6 @@ import TaskComponent from "../components/task.js";
 import TaskEditComponent from "../components/task-edit.js";
 import {render, replace, RenderPosition} from "../utils/render.js";
 
-const ESCAPE_BUTTON = `Escape`;
-const ESC_BUTTON = `Esc`;
-
 const Mode = {
   DEFAULT: `default`,
   EDIT: `edit`,
@@ -18,6 +15,7 @@ export default class TaskController {
     this._mode = Mode.DEFAULT;
     this._taskComponent = null;
     this._taskEditComponent = null;
+
     this._onEscKeyDown = this._onEscKeyDown.bind(this);
   }
 
@@ -34,12 +32,15 @@ export default class TaskController {
     });
 
     this._taskComponent.setArchiveButtonClickHandler(() => {
-      this._onDataChange(this, task, Object.assign({}, task, {isArchive: !task.isArchive}));
+      this._onDataChange(this, task, Object.assign({}, task, {
+        isArchive: !task.isArchive,
+      }));
     });
 
     this._taskComponent.setFavoritesButtonClickHandler(() => {
-      this._onDataChange(this, task, Object.assign({}, task, {isFavorite: !task.isFavorite}));
-
+      this._onDataChange(this, task, Object.assign({}, task, {
+        isFavorite: !task.isFavorite,
+      }));
     });
 
     this._taskEditComponent.setSubmitHandler((evt) => {
@@ -75,10 +76,10 @@ export default class TaskController {
   }
 
   _onEscKeyDown(evt) {
-    const isEscKey = evt.key === ESCAPE_BUTTON || evt.key === ESC_BUTTON;
+    const isEscKey = evt.key === `Escape` || evt.key === `Esc`;
 
     if (isEscKey) {
-      this.replaceEditToTask();
+      this._replaceEditToTask();
       document.removeEventListener(`keydown`, this._onEscKeyDown);
     }
   }
