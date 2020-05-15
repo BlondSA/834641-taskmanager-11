@@ -2,6 +2,9 @@ import TaskComponent from "../components/task.js";
 import TaskEditComponent from "../components/task-edit.js";
 import {render, replace, RenderPosition} from "../utils/render.js";
 
+const ESCAPE = `Escape`;
+const ESC = `Esc`;
+
 const Mode = {
   DEFAULT: `default`,
   EDIT: `edit`,
@@ -76,7 +79,7 @@ export default class TaskController {
   }
 
   _onEscKeyDown(evt) {
-    const isEscKey = evt.key === `Escape` || evt.key === `Esc`;
+    const isEscKey = evt.key === ESCAPE || evt.key === ESC;
 
     if (isEscKey) {
       this._replaceEditToTask();
